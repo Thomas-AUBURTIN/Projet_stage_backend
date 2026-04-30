@@ -25,3 +25,10 @@ def getAllMessage(db : Session = Depends(get_db)):
     except Exception as e:
         return {"erreur": str(e)}
     return db_message
+
+@app.post("/taches/")
+def create_tache(m: MessageCreation, db: Session = Depends(get_db)):
+    try:
+        return crud.message.createMessage(m,db)
+    except Exception as e:
+        return {"erreur": str(e)}

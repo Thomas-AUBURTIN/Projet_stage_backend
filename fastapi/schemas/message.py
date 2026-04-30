@@ -1,7 +1,7 @@
 from pydantic import BaseModel,Field
-from datetime import date
+from datetime import datetime
 
 class MessageCreation(BaseModel):
     question : str = Field(min_length =1)
     reponse : str = Field(min_length =1)
-    messageDate : date = Field(default_factory=date.today)
+    Datecreation : datetime = Field(default_factory=datetime.utcnow)

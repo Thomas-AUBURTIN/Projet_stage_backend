@@ -16,7 +16,7 @@ def createMessage(m : MessageCreation, db : Session):
         db_message = Message(
                 question = m.question,
                 reponse = m.reponse,
-                messageDate = m.messageDate
+                Datecreation = m.Datecreation
                 )
         db.add(db_message)
         db.commit()
