@@ -35,7 +35,7 @@ def create_tache(m: MessageCreation, db: Session = Depends(get_db)):
     except Exception as e:
         return {"erreur": str(e)}
 
-@app.post("/request_ollama")
+@app.post("/request_ollama/")
 def request_ollama(m : messageOllama,db: Session = Depends(get_db)):
     try:
         return crud.message.message_ollama(m,db)

@@ -19,7 +19,7 @@ def createMessage(m : MessageCreation, db : Session):
         db_message = Message(
                 question = m.question,
                 reponse = m.reponse,
-                Datecreation = m.Datecreation
+                 Datecreation = m.Datecreation
                 )
         db.add(db_message)
         db.commit()
@@ -40,6 +40,7 @@ def message_ollama(m : messageOllama, db : Session):
         }
         url ="http://localhost:11434/api/chat"
         response = requests.post(url,json=data)
+        response.raise_for_status() 
         response_json = json.loads(response.text)
         ai_reply = response_json["message"]["content"]
         db_message = Message(
