@@ -1,9 +1,11 @@
 from fastapi  import FastAPI,Depends, HTTPException
 from sqlalchemy.orm import Session
 from db.database import SessionLocal
-from schemas.message import MessageCreation
+from schemas.message import MessageCreation,messageOllama
 import crud.message
 from sqlalchemy.exc import SQLAlchemyError
+
+
 
 def get_db():
     db = SessionLocal()
@@ -30,5 +32,12 @@ def getAllMessage(db : Session = Depends(get_db)):
 def create_tache(m: MessageCreation, db: Session = Depends(get_db)):
     try:
         return crud.message.createMessage(m,db)
+    except Exception as e:
+        return {"erreur": str(e)}
+
+@app.post("/request_ollama/")
+def request_ollama(m : messageOllama,db: Session = Depends(get_db)):
+    try:
+        return crud.message.message_ollama(m,db)
     except Exception as e:
         return {"erreur": str(e)}
